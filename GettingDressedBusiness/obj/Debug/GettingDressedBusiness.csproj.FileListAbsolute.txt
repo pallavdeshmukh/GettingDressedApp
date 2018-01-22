@@ -1,0 +1,5 @@
+c:\users\palde\documents\visual studio 2015\Projects\GettingDressedConsoleApp\GettingDressedBusiness\bin\Debug\GettingDressedBusiness.dll
+c:\users\palde\documents\visual studio 2015\Projects\GettingDressedConsoleApp\GettingDressedBusiness\bin\Debug\GettingDressedBusiness.pdb
+c:\users\palde\documents\visual studio 2015\Projects\GettingDressedConsoleApp\GettingDressedBusiness\obj\Debug\GettingDressedBusiness.dll
+c:\users\palde\documents\visual studio 2015\Projects\GettingDressedConsoleApp\GettingDressedBusiness\obj\Debug\GettingDressedBusiness.pdb
+c:\users\palde\documents\visual studio 2015\Projects\GettingDressedConsoleApp\GettingDressedBusiness\obj\Debug\GettingDressedBusiness.csprojResolveAssemblyReference.cache

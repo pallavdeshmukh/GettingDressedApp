@@ -1,0 +1,9 @@
+c:\users\palde\documents\visual studio 2015\Projects\GettingDressedConsoleApp\UnitTestProject\bin\Debug\UnitTestProject.dll
+c:\users\palde\documents\visual studio 2015\Projects\GettingDressedConsoleApp\UnitTestProject\bin\Debug\UnitTestProject.pdb
+c:\users\palde\documents\visual studio 2015\Projects\GettingDressedConsoleApp\UnitTestProject\bin\Debug\GettingDressedBusiness.dll
+c:\users\palde\documents\visual studio 2015\Projects\GettingDressedConsoleApp\UnitTestProject\bin\Debug\GettingDressedConsoleApp.exe
+c:\users\palde\documents\visual studio 2015\Projects\GettingDressedConsoleApp\UnitTestProject\bin\Debug\GettingDressedBusiness.pdb
+c:\users\palde\documents\visual studio 2015\Projects\GettingDressedConsoleApp\UnitTestProject\bin\Debug\GettingDressedConsoleApp.pdb
+c:\users\palde\documents\visual studio 2015\Projects\GettingDressedConsoleApp\UnitTestProject\obj\Debug\UnitTestProject.csprojResolveAssemblyReference.cache
+c:\users\palde\documents\visual studio 2015\Projects\GettingDressedConsoleApp\UnitTestProject\obj\Debug\UnitTestProject.dll
+c:\users\palde\documents\visual studio 2015\Projects\GettingDressedConsoleApp\UnitTestProject\obj\Debug\UnitTestProject.pdb
