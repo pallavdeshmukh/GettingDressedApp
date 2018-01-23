@@ -7,7 +7,7 @@ using GettingDressedBusiness.Common;
 
 namespace GettingDressedBusiness.Validation
 {
-    public class ValidateInput
+    public class ValidateInput : IValidateInput
     {              
         public bool IsInputValid(string[] args)
         {

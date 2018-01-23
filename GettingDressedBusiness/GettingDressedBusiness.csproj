@@ -44,6 +44,9 @@
     <Compile Include="Helper\CommandHelper.cs" />
     <Compile Include="Model\Command.cs" />
     <Compile Include="Processing\GetDressed.cs" />
+    <Compile Include="Processing\IGettingDressed.cs" />
+    <Compile Include="Validation\IRules.cs" />
+    <Compile Include="Validation\IValidateInput.cs" />
     <Compile Include="Validation\Rules.cs" />
     <Compile Include="Validation\ValidateInput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -21,15 +21,15 @@ namespace GettingDressedBusiness.Processing.Tests
             string[] inputArgs = new string[] { "HOT", "8", "6", "4", "2", "1", "7" };
             string expected = "Removing PJs, shorts, shirt, sunglasses, sandals, leaving house";
 
-            ValidateInput inputValidator = new ValidateInput();
+            IValidateInput inputValidator = new ValidateInput();
             CommandHelper commandHelper = new CommandHelper();
-            List<Command> commandList = commandHelper.GetCommandList();
-            Rules rules = new Rules(inputArgs, commandList);
+            IList<Command> commandList = commandHelper.GetCommandList();
+            IRules rules = new Rules(inputArgs, commandList);
 
             // act 
-            GetDressed gd = new GetDressed(inputArgs, inputValidator, commandList, rules);
-            gd.ProcessRequest();
-            string output = gd._outputString.ToString();
+            IGettingDressed getDressedObj = new GetDressed(inputArgs, inputValidator, commandList, rules);
+            getDressedObj.ProcessRequest();
+            string output = getDressedObj.OutputString.ToString();
             //Assert
             Assert.AreEqual(expected, output, true);            
         }
@@ -41,15 +41,15 @@ namespace GettingDressedBusiness.Processing.Tests
             string[] inputArgs = new string[] { "COLD", "8", "6", "3", "4", "2", "5", "1", "7" };
             string expected = "Removing PJs, pants, socks, shirt, hat, jacket, boots, leaving house";
 
-            ValidateInput inputValidator = new ValidateInput();
+            IValidateInput inputValidator = new ValidateInput();
             CommandHelper commandHelper = new CommandHelper();
-            List<Command> commandList = commandHelper.GetCommandList();
-            Rules rules = new Rules(inputArgs, commandList);
+            IList<Command> commandList = commandHelper.GetCommandList();
+            IRules rules = new Rules(inputArgs, commandList);
 
             // act 
-            GetDressed gd = new GetDressed(inputArgs, inputValidator, commandList, rules);
-            gd.ProcessRequest();
-            string output = gd._outputString.ToString();
+            IGettingDressed getDressedObj = new GetDressed(inputArgs, inputValidator, commandList, rules);
+            getDressedObj.ProcessRequest();
+            string output = getDressedObj.OutputString.ToString();
             
             //Assert
             Assert.AreEqual(expected, output, true);
@@ -62,15 +62,15 @@ namespace GettingDressedBusiness.Processing.Tests
             string[] inputArgs = new string[] { "HOT", "8", "6", "6" };
             string expected = "Removing PJs, shorts, fail";
 
-            ValidateInput inputValidator = new ValidateInput();
+            IValidateInput inputValidator = new ValidateInput();
             CommandHelper commandHelper = new CommandHelper();
-            List<Command> commandList = commandHelper.GetCommandList();
-            Rules rules = new Rules(inputArgs, commandList);
+            IList<Command> commandList = commandHelper.GetCommandList();
+            IRules rules = new Rules(inputArgs, commandList);
 
             // act 
-            GetDressed gd = new GetDressed(inputArgs, inputValidator, commandList, rules);
-            gd.ProcessRequest();
-            string output = gd._outputString.ToString();
+            IGettingDressed getDressedObj = new GetDressed(inputArgs, inputValidator, commandList, rules);
+            getDressedObj.ProcessRequest();
+            string output = getDressedObj.OutputString.ToString();
 
             //Assert
             Assert.AreEqual(expected, output, true);
@@ -82,15 +82,15 @@ namespace GettingDressedBusiness.Processing.Tests
             string[] inputArgs = new string[] { "HOT", "8", "6", "3" };
             string expected = "Removing PJs, shorts, fail";
 
-            ValidateInput inputValidator = new ValidateInput();
+            IValidateInput inputValidator = new ValidateInput();
             CommandHelper commandHelper = new CommandHelper();
-            List<Command> commandList = commandHelper.GetCommandList();
-            Rules rules = new Rules(inputArgs, commandList);
+            IList<Command> commandList = commandHelper.GetCommandList();
+            IRules rules = new Rules(inputArgs, commandList);
 
             // act 
-            GetDressed gd = new GetDressed(inputArgs, inputValidator, commandList, rules);
-            gd.ProcessRequest();
-            string output = gd._outputString.ToString();
+            IGettingDressed getDressedObj = new GetDressed(inputArgs, inputValidator, commandList, rules);
+            getDressedObj.ProcessRequest();
+            string output = getDressedObj.OutputString.ToString();
 
             //Assert
             Assert.AreEqual(expected, output, true);
@@ -103,15 +103,15 @@ namespace GettingDressedBusiness.Processing.Tests
             string[] inputArgs = new string[] { "COLD", "8", "6", "3", "4", "2", "5", "7" };
             string expected = "Removing PJs, pants, socks, shirt, hat, jacket, fail";
 
-            ValidateInput inputValidator = new ValidateInput();
+            IValidateInput inputValidator = new ValidateInput();
             CommandHelper commandHelper = new CommandHelper();
-            List<Command> commandList = commandHelper.GetCommandList();
-            Rules rules = new Rules(inputArgs, commandList);
+            IList<Command> commandList = commandHelper.GetCommandList();
+            IRules rules = new Rules(inputArgs, commandList);
 
             // act 
-            GetDressed gd = new GetDressed(inputArgs, inputValidator, commandList, rules);
-            gd.ProcessRequest();
-            string output = gd._outputString.ToString();
+            IGettingDressed getDressedObj = new GetDressed(inputArgs, inputValidator, commandList, rules);
+            getDressedObj.ProcessRequest();
+            string output = getDressedObj.OutputString.ToString();
 
             //Assert
             Assert.AreEqual(expected, output, true);
@@ -124,15 +124,15 @@ namespace GettingDressedBusiness.Processing.Tests
             string[] inputArgs = new string[] { "COLD", "6" };
             string expected = "fail";
 
-            ValidateInput inputValidator = new ValidateInput();
+            IValidateInput inputValidator = new ValidateInput();
             CommandHelper commandHelper = new CommandHelper();
-            List<Command> commandList = commandHelper.GetCommandList();
-            Rules rules = new Rules(inputArgs, commandList);
+            IList<Command> commandList = commandHelper.GetCommandList();
+            IRules rules = new Rules(inputArgs, commandList);
 
             // act 
-            GetDressed gd = new GetDressed(inputArgs, inputValidator, commandList, rules);
-            gd.ProcessRequest();
-            string output = gd._outputString.ToString();
+            IGettingDressed getDressedObj = new GetDressed(inputArgs, inputValidator, commandList, rules);
+            getDressedObj.ProcessRequest();
+            string output = getDressedObj.OutputString.ToString();
 
             //Assert
             Assert.AreEqual(expected, output, true);
@@ -144,15 +144,15 @@ namespace GettingDressedBusiness.Processing.Tests
             string[] inputArgs = new string[] { "COLD", "8", "6", "2", "4", "1", "7" };
             string expected = "Removing PJs, pants, fail";
 
-            ValidateInput inputValidator = new ValidateInput();
+            IValidateInput inputValidator = new ValidateInput();
             CommandHelper commandHelper = new CommandHelper();
-            List<Command> commandList = commandHelper.GetCommandList();
-            Rules rules = new Rules(inputArgs, commandList);
+            IList<Command> commandList = commandHelper.GetCommandList();
+            IRules rules = new Rules(inputArgs, commandList);
 
             // act 
-            GetDressed gd = new GetDressed(inputArgs, inputValidator, commandList, rules);
-            gd.ProcessRequest();
-            string output = gd._outputString.ToString();
+            IGettingDressed getDressedObj = new GetDressed(inputArgs, inputValidator, commandList, rules);
+            getDressedObj.ProcessRequest();
+            string output = getDressedObj.OutputString.ToString();
 
             //Assert
             Assert.AreEqual(expected, output, true);
@@ -165,15 +165,15 @@ namespace GettingDressedBusiness.Processing.Tests
             string[] inputArgs = new string[] { "COLD", "8", "6", "5", "4", "1", "7" };
             string expected = "Removing PJs, pants, fail";
 
-            ValidateInput inputValidator = new ValidateInput();
+            IValidateInput inputValidator = new ValidateInput();
             CommandHelper commandHelper = new CommandHelper();
-            List<Command> commandList = commandHelper.GetCommandList();
-            Rules rules = new Rules(inputArgs, commandList);
+            IList<Command> commandList = commandHelper.GetCommandList();
+            IRules rules = new Rules(inputArgs, commandList);
 
             // act 
-            GetDressed gd = new GetDressed(inputArgs, inputValidator, commandList, rules);
-            gd.ProcessRequest();
-            string output = gd._outputString.ToString();
+            IGettingDressed getDressedObj = new GetDressed(inputArgs, inputValidator, commandList, rules);
+            getDressedObj.ProcessRequest();
+            string output = getDressedObj.OutputString.ToString();
 
             //Assert
             Assert.AreEqual(expected, output, true);
@@ -185,15 +185,15 @@ namespace GettingDressedBusiness.Processing.Tests
             string[] inputArgs = new string[] { "HOT", "8", "6", "4", "5", "1", "7" };
             string expected = "Removing PJs, shorts, shirt, fail";
 
-            ValidateInput inputValidator = new ValidateInput();
+            IValidateInput inputValidator = new ValidateInput();
             CommandHelper commandHelper = new CommandHelper();
-            List<Command> commandList = commandHelper.GetCommandList();
-            Rules rules = new Rules(inputArgs, commandList);
+            IList<Command> commandList = commandHelper.GetCommandList();
+            IRules rules = new Rules(inputArgs, commandList);
 
             // act 
-            GetDressed gd = new GetDressed(inputArgs, inputValidator, commandList, rules);
-            gd.ProcessRequest();
-            string output = gd._outputString.ToString();
+            IGettingDressed getDressedObj = new GetDressed(inputArgs, inputValidator, commandList, rules);
+            getDressedObj.ProcessRequest();
+            string output = getDressedObj.OutputString.ToString();
 
             //Assert
             Assert.AreEqual(expected, output, true);

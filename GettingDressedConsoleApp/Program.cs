@@ -22,15 +22,15 @@ namespace GettingDressedConsoleApp
                 string args1 = Console.ReadLine();
                 args = args1.Replace(",",string.Empty).Split(' ');
             }
-            ValidateInput inputValidator = new ValidateInput();
+            IValidateInput inputValidator = new ValidateInput();
             CommandHelper commandHelper = new CommandHelper();
-            List<Command> commandList = commandHelper.GetCommandList();
-            Rules rules = new Rules(args, commandList);
+            IList<Command> commandList = commandHelper.GetCommandList();
+            IRules rules = new Rules(args, commandList);
 
-            GetDressed gd = new GetDressed(args, inputValidator, commandList, rules);
-            gd.ProcessRequest();
+            IGettingDressed getDressedObj = new GetDressed(args, inputValidator, commandList, rules);
+            getDressedObj.ProcessRequest();
 
-            Console.WriteLine("Output: " + gd._outputString.ToString());
+            Console.WriteLine("Output: " + getDressedObj.OutputString.ToString());
             Console.ReadLine();
         }
     }

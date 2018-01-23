@@ -7,17 +7,17 @@ using GettingDressedBusiness.Common;
 using GettingDressedBusiness.Model;
 namespace GettingDressedBusiness.Validation
 {
-    public class Rules
+    public class Rules : IRules
     {
-        private string[] _inputArgs { get; set; }
-        private List<Command> _commandList { get; set; }
-        private TemperatureType _temperatureType { get; set; }
+        private string[] InputArgs { get; set; }
+        private IList<Command> CommandList { get; set; }
+        private TemperatureType TemperatureType { get; set; }
 
-        public Rules(string[] inputArgs, List<Command> commandList)
+        public Rules(string[] inputArgs, IList<Command> commandList)
         {
-            _inputArgs = inputArgs;
-            _commandList = commandList;
-            _temperatureType = _inputArgs[0] == Enum.GetName(typeof(TemperatureType), 0) ? TemperatureType.HOT : TemperatureType.COLD;
+            InputArgs = inputArgs;
+            CommandList = commandList;
+            TemperatureType = InputArgs[0] == Enum.GetName(typeof(TemperatureType), 0) ? TemperatureType.HOT : TemperatureType.COLD;
         }
 
         #region [PreProcessingRule]        
@@ -28,8 +28,8 @@ namespace GettingDressedBusiness.Validation
         private bool IsPajamasNotOffFirst()
         {
             //Pajamas must be taken off before anything else can be put on
-            int command = Convert.ToInt32(_inputArgs[1]);
-            Command commandToRun = _commandList.Where(c => c.Description == "Take off pajamas").First();
+            int command = Convert.ToInt32(InputArgs[1]);
+            Command commandToRun = CommandList.Where(c => c.Description == "Take off pajamas").First();
             return command != commandToRun.CommandId;
         }
 
@@ -38,9 +38,9 @@ namespace GettingDressedBusiness.Validation
         #region [InCommandProcessingRule] 
         public bool EvaluateBusinessRule(int lastCmdIndex, int currentCmdIndex)
         {
-            if (IsDuplicateCommand(_inputArgs[lastCmdIndex], _inputArgs[currentCmdIndex])
-                || IsSocksPutWhenHot(_inputArgs[currentCmdIndex])
-                || IsJacketPutWhenHot(_inputArgs[currentCmdIndex])
+            if (IsDuplicateCommand(InputArgs[lastCmdIndex], InputArgs[currentCmdIndex])
+                || IsSocksPutWhenHot(InputArgs[currentCmdIndex])
+                || IsJacketPutWhenHot(InputArgs[currentCmdIndex])
                 || IsSocksNotPutBeforeFootwear(currentCmdIndex)
                 || IsPentsNotPutBeforeFootwear(currentCmdIndex)
                 || IsShirtNotPutBeforeHeadwear(currentCmdIndex)
@@ -57,8 +57,8 @@ namespace GettingDressedBusiness.Validation
         private bool IsSocksPutWhenHot(string currentCmd)
         {
             int command = Convert.ToInt32(currentCmd);
-            Command commandToPutSocks = _commandList.Where(c => c.Description == "Put on socks").First();
-            if (_temperatureType == TemperatureType.HOT)
+            Command commandToPutSocks = CommandList.Where(c => c.Description == "Put on socks").First();
+            if (TemperatureType == TemperatureType.HOT)
             {
                 return command == commandToPutSocks.CommandId;
             }
@@ -67,8 +67,8 @@ namespace GettingDressedBusiness.Validation
         private bool IsJacketPutWhenHot(string currentCmd)
         {
             int command = Convert.ToInt32(currentCmd);
-            Command commandToPutJacket = _commandList.Where(c => c.Description == "Put on jacket").First();
-            if (_temperatureType == TemperatureType.HOT)
+            Command commandToPutJacket = CommandList.Where(c => c.Description == "Put on jacket").First();
+            if (TemperatureType == TemperatureType.HOT)
             {
                 return command == commandToPutJacket.CommandId;
             }
@@ -76,32 +76,32 @@ namespace GettingDressedBusiness.Validation
         }
         private bool IsSocksNotPutBeforeFootwear(int currentCmdIndex)
         {
-            if (_temperatureType == TemperatureType.COLD)
+            if (TemperatureType == TemperatureType.COLD)
             {
-                Command y = _commandList.Where(c => c.Description == "Put on footwear").First();
-                Command x = _commandList.Where(c => c.Description == "Put on socks").First();
+                Command y = CommandList.Where(c => c.Description == "Put on footwear").First();
+                Command x = CommandList.Where(c => c.Description == "Put on socks").First();
                 return IsXNotPutBeforeY(currentCmdIndex, x, y);
             }           
             return false;
         }
         private bool IsPentsNotPutBeforeFootwear(int currentCmdIndex)
         {
-            Command y = _commandList.Where(c => c.Description == "Put on footwear").First();
-            Command x = _commandList.Where(c => c.Description == "Put on pants").First();
+            Command y = CommandList.Where(c => c.Description == "Put on footwear").First();
+            Command x = CommandList.Where(c => c.Description == "Put on pants").First();
             return IsXNotPutBeforeY(currentCmdIndex, x, y);
         }       
         private bool IsShirtNotPutBeforeHeadwear(int currentCmdIndex)
         {
-            Command y = _commandList.Where(c => c.Description == "Put on headwear").First();
-            Command x = _commandList.Where(c => c.Description == "Put on shirt").First();
+            Command y = CommandList.Where(c => c.Description == "Put on headwear").First();
+            Command x = CommandList.Where(c => c.Description == "Put on shirt").First();
             return IsXNotPutBeforeY(currentCmdIndex,x, y);
         }
         private bool IsShirtNotPutBeforeJacket(int currentCmdIndex)
         {
-            if (_temperatureType == TemperatureType.COLD)
+            if (TemperatureType == TemperatureType.COLD)
             {
-                Command y = _commandList.Where(c => c.Description == "Put on jacket").First();
-                Command x = _commandList.Where(c => c.Description == "Put on shirt").First();
+                Command y = CommandList.Where(c => c.Description == "Put on jacket").First();
+                Command x = CommandList.Where(c => c.Description == "Put on shirt").First();
                 return IsXNotPutBeforeY(currentCmdIndex, x, y);
             }
             return false;
@@ -109,12 +109,12 @@ namespace GettingDressedBusiness.Validation
         private bool IsXNotPutBeforeY(int currentCmdIndex, Command x, Command y)
         {
             bool IsXPutBeforeY = false;
-            int currentcommand = Convert.ToInt32(_inputArgs[currentCmdIndex]);            
+            int currentcommand = Convert.ToInt32(InputArgs[currentCmdIndex]);            
             if (currentcommand == y.CommandId)
             {                
                 for (int i = 1; i < currentCmdIndex; i++)
                 {
-                    if (Convert.ToInt32(_inputArgs[i]) == x.CommandId)
+                    if (Convert.ToInt32(InputArgs[i]) == x.CommandId)
                     {
                         IsXPutBeforeY = true;
                         break;
@@ -131,17 +131,17 @@ namespace GettingDressedBusiness.Validation
         {
             bool isMissing = false;
             //You cannot leave the house until all items of clothing are on (except socks and a jacket when it’s hot)
-            int currentcommand = Convert.ToInt32(_inputArgs[currentCmdIndex]);
-            Command commandToLeaveHouse = _commandList.Where(c => c.Description == "Leave house").First();
+            int currentcommand = Convert.ToInt32(InputArgs[currentCmdIndex]);
+            Command commandToLeaveHouse = CommandList.Where(c => c.Description == "Leave house").First();
             if (currentcommand == commandToLeaveHouse.CommandId)
             {
-                if (_temperatureType == TemperatureType.COLD)
+                if (TemperatureType == TemperatureType.COLD)
                 {
-                    isMissing = _inputArgs.Count() < 9;
+                    isMissing = InputArgs.Count() < 9;
                 }
-                if (_temperatureType == TemperatureType.HOT)
+                if (TemperatureType == TemperatureType.HOT)
                 {
-                    isMissing = _inputArgs.Count() < 7;
+                    isMissing = InputArgs.Count() < 7;
                 }
             }
             return isMissing;

@@ -9,56 +9,56 @@ using GettingDressedBusiness.Validation;
 
 namespace GettingDressedBusiness.Processing
 {
-    public class GetDressed
+    public class GetDressed : IGettingDressed
     {
         const string FAIL = "fail";
         const string SEPRATOR = ", ";
-        public StringBuilder _outputString { get; set; }
-        private List<Command> _commandList { get; set; }
-        private ValidateInput _InputValidator { get; set; }
-        private string[] _inputArgs { get; set; }
-        private Rules _rules { get; set; }
+        public StringBuilder OutputString { get; set; }
+        private IList<Command> CommandList { get; set; }
+        private IValidateInput InputValidator { get; set; }
+        private string[] InputArgs { get; set; }
+        private IRules Rules { get; set; }
 
-        public GetDressed(string[] inputArgs, ValidateInput validateInput, List<Command> commandList, Rules rules)
+        public GetDressed(string[] inputArgs, IValidateInput validateInput, IList<Command> commandList, IRules rules)
         {
-            _InputValidator = validateInput;
-            _commandList = commandList;
-            _inputArgs = inputArgs;
-            _rules = rules;
-            _outputString = new StringBuilder();
+            InputValidator = validateInput;
+            CommandList = commandList;
+            InputArgs = inputArgs;
+            Rules = rules;
+            OutputString = new StringBuilder();
         }
 
         public void ProcessRequest()
         {            
-            if (!_InputValidator.IsInputValid(_inputArgs))
+            if (!InputValidator.IsInputValid(InputArgs))
             {
-                PrintOutput(FAIL);
+                FormatOutput(FAIL);
                 return;
             }            
-            if (_rules.EvaluatePreProcessingRule())
+            if (Rules.EvaluatePreProcessingRule())
             {
-                PrintOutput(FAIL);
+                FormatOutput(FAIL);
                 return;
             }
-            for (int i = 1; i < _inputArgs.Count(); i++)
+            for (int i = 1; i < InputArgs.Count(); i++)
             {
-                int currentCommand = Convert.ToInt32(_inputArgs[i]);
+                int currentCommand = Convert.ToInt32(InputArgs[i]);
 
-                if (_rules.EvaluateBusinessRule(i-1, i))
+                if (Rules.EvaluateBusinessRule(i-1, i))
                 {
-                    PrintOutput(FAIL);
+                    FormatOutput(FAIL);
                     return;
                 }                           
-                Command commandToRun = _commandList.Where(c => c.CommandId == currentCommand).First();
-                string response = _inputArgs[0] == Enum.GetName(typeof(TemperatureType), 0) ? commandToRun.HotResponse : commandToRun.ColdResponse;
-                PrintOutput(response, i);
+                Command commandToRun = CommandList.Where(c => c.CommandId == currentCommand).First();
+                string response = InputArgs[0] == Enum.GetName(typeof(TemperatureType), 0) ? commandToRun.HotResponse : commandToRun.ColdResponse;
+                FormatOutput(response, i);
             }            
         }
-        public void PrintOutput(string response, int stepNumber=100)
+        public void FormatOutput(string response, int stepNumber=100)
         {            
-            _outputString.Append(response);
-            if ((stepNumber + 1) < _inputArgs.Count())
-                _outputString.Append(SEPRATOR);
+            OutputString.Append(response);
+            if ((stepNumber + 1) < InputArgs.Count())
+                OutputString.Append(SEPRATOR);
         }
 
     }
